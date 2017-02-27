@@ -17,13 +17,13 @@ feature 'posts' do
   end
 
   context 'posts have been added' do
+    before do
+      @posts = Post.create(caption: 'This view is incredible!')
+    end
 
     scenario 'display posts' do
       visit '/posts'
-      click_link 'Add a post'
-      attach_file "app/images/instagram default upload.jpg"
-      fill_in 'Caption', with: 'This view is incredible!'
-      click_button 'Post'
+      expect(page).to have_content('This view is incredible!')
       expect(page).not_to have_content('No posts yet')
     end
   end
@@ -33,7 +33,6 @@ feature 'posts' do
     scenario 'prompts user to fill out a form, then displays the new post' do
       visit '/posts'
       click_link 'Add a post'
-      attach_file "instagram default upload.jpg", app/images
       fill_in 'Caption', with: 'This view is incredible!'
       click_button 'Post'
       expect(page).to have_content 'This view is incredible!'
@@ -41,17 +40,16 @@ feature 'posts' do
     end
   end
 
-context 'deleting posts' do
-
-  scenario 'removes a post when a user clicks a delete link' do
-    visit '/posts'
-    click_link 'Add a post'
-    attach_file "instagram default upload.jpg", app/images
-    fill_in 'Caption', with: 'This view is incredible!'
-    click_button 'Post'
-    click_link 'Delete'
-    expect(page).not_to have_content 'This view is incredible!'
-    expect(page).to have_content 'Post deleted successfully'
-  end
-end
+# context 'deleting posts' do
+#
+#   scenario 'removes a post when a user clicks a delete link' do
+#     visit '/posts'
+#     click_link 'Add a post'
+#     fill_in 'Caption', with: 'This view is incredible!'
+#     click_button 'Post'
+#     click_link 'Delete'
+#     expect(page).not_to have_content 'This view is incredible!'
+#     expect(page).to have_content 'Post deleted successfully'
+#   end
+# end
 end
