@@ -1,0 +1,11 @@
+
+<% if @posts.any? %>
+  <% @posts.each do |post| %>
+  <%= image_tag post.image.url(:thumb) %>
+  <%= post.caption %>
+  <% end %>
+<% else %>
+  <h1>No posts yet</h1>
+<% end %>
+
+<a href='/posts/new'>Add a post</a>
