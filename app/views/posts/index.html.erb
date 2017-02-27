@@ -1,11 +1,17 @@
-
+<a class="add-post-link" href='/posts/new'>Add a post</a>
 <% if @posts.any? %>
   <% @posts.each do |post| %>
+  <div class="col-sm-4">
+  <div class="container">
+  <div class="panel panel-default">
+    <div class="panel-body">
   <%= image_tag post.image.url(:thumb) %>
   <%= post.caption %>
+    </div>
+  </div>
+</div>
+</div>
   <% end %>
 <% else %>
   <h1>No posts yet</h1>
 <% end %>
-
-<a href='/posts/new'>Add a post</a>
